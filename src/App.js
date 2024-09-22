@@ -16,7 +16,6 @@ function App() {
             <li><Link to="/order">オーダー画面</Link></li>
             <li><Link to="/admin">管理画面</Link></li>
             <li><Link to="/kitchen">キッチン画面</Link></li>
-            <li><Link to="/credit">支払い方法選択画面</Link></li>
             <li><Link to="/salesManagement">売上管理画面</Link></li>
           </ul>
         </nav>

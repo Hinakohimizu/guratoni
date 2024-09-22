@@ -46,6 +46,13 @@ function Admin() {
     return orders?.reduce((total, item) => total + (item.price || 0), 0) || 0;
   };
 
+  const handleUpdateStatus = async (orderId, newStatus) => {
+    const orderRef = doc(db, "orders", orderId);
+    await updateDoc(orderRef, {
+      status: newStatus,
+    });
+  };
+
   return (
     <div className="Admin">
       <h1>管理画面</h1>
@@ -55,18 +62,23 @@ function Admin() {
           <div key={order.id} className={`order-card ${order.completed ? 'completed' : ''}`}>
             <h4>オーダー {order.id}</h4>
             <p>日時: {new Date(order.timestamp).toLocaleString()}</p>
-            <p>テーブル: {order.tables ? order.tables.join(", ") : "なし"}</p>
-            <p>カウンター: {order.counters ? order.counters.join(", ") : "なし"}</p>
             <p>オーダー内容:</p>
             {order.orders?.map((item, idx) => (
               <div key={idx}>
                 <p>客 {idx + 1}: メイン料理: {item.food || "未選択"}, トッピング: {item.topping || "未選択"}
                   {!order.completed && (
-                    <button onClick={() => handleCompleteOrder(order.id)}>提供済み</button>
+                    <div>
+                      <button onClick={() => handleUpdateStatus(order.id, "cooking")}>調理中</button>
+                      <button onClick={() => handleUpdateStatus(order.id, "cooked")}>調理済み</button>
+                      <button onClick={() => handleUpdateStatus(order.id, "served")}>提供済み</button>
+                    </div>
                   )}
                 </p>
               </div>
-            )) || <p>オーダー内容はありません</p>}
+            )) || 
+              <p>オーダー内容はありません</p>
+            }            
+            <p>ステータス: {order.status || "未設定"}</p>
           </div>
         ))
       ) : (
