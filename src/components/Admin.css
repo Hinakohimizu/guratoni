@@ -1,0 +1,10 @@
+.order-card.completed {
+    background-color: #9b9898; /* グレーがかった色 */
+    opacity: 0.6; /* 薄くする */
+  }
+  
+  .completed {
+    background-color: #9b9898; /* グレーがかった色 */
+    text-decoration: line-through; /* 取り消し線を追加 */
+  }
+  
