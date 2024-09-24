@@ -9,11 +9,14 @@ function Admin() {
 
   useEffect(() => {
     const fetchOrders = () => {
-      const ordersData = collection(db, "orders");
-      onSnapshot(ordersData, (snapshot) => {
+      const ordersCollection = collection(db, "orders");
+      const unsubscribe = onSnapshot(ordersCollection, (snapshot) => {
         const orders = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setSubmittedOrders(orders.reverse());
       });
+
+      // クリーンアップ関数
+      return () => unsubscribe();
     };
 
     fetchOrders();
@@ -55,7 +58,7 @@ function Admin() {
 
   return (
     <div className="Admin">
-      <h1>管理画面</h1>
+      <h1>オーダー管理画面</h1>
       <h3>受け付けたオーダー</h3>
       {submittedOrders.length > 0 ? (
         submittedOrders.map((order) => (
@@ -68,9 +71,9 @@ function Admin() {
                 <p>客 {idx + 1}: メイン料理: {item.food || "未選択"}, トッピング: {item.topping || "未選択"}
                   {!order.completed && (
                     <div>
-                      <button onClick={() => handleUpdateStatus(order.id, "cooking")}>調理中</button>
-                      <button onClick={() => handleUpdateStatus(order.id, "cooked")}>調理済み</button>
-                      <button onClick={() => handleUpdateStatus(order.id, "served")}>提供済み</button>
+                      <button className={`status-button cooking ${order.status === "cooking" ? "active" : ""}`} onClick={() => handleUpdateStatus(order.id, "cooking")}>調理中</button>
+                      <button className={`status-button cooked ${order.status === "cooked" ? "active" : ""}`} onClick={() => handleUpdateStatus(order.id, "cooked")}>調理済み</button>
+                      <button className={`status-button served ${order.status === "served" ? "active" : ""}`} onClick={() => handleUpdateStatus(order.id, "served")}>提供済み</button>
                     </div>
                   )}
                 </p>

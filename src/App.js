@@ -2,36 +2,38 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Order from './components/Order';
-import Auth from './components/Admin/Auth'; // 正しいパスを確認
-import Kitchen from './components/Kitchen'; // 正しいパスを確認
-import CustomerSurvey from './components/Customer'; // 追加
-import SalesManagement from './components/SalesManagement';
-
-
+import Auth from './components/Admin/Auth';
+import Kitchen from './components/Kitchen';
+import SalesManagement from './components/SalesManagement'; // インポートを確認
+import CustomerSurvey from './components/Customer';
+import MenuManager from './components/MenuManager';
+import SecondOrder from './components/SecondOrder';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <h1>グラトニーオーダー管理システム</h1>
+        <h1>オーダー管理システム</h1>
         <nav>
           <ul>
             <li><Link to="/">ホーム</Link></li>
-            <li><Link to="/order">オーダー画面</Link></li>
+            <li><Link to="/order">ファーストオーダー画面</Link></li>
+            <li><Link to="/secondorder">追加オーダー画面</Link></li>
             <li><Link to="/auth">オーダー管理画面</Link></li>
             <li><Link to="/kitchen">キッチンモニター</Link></li>
-            <li><Link to="/salesManagement">売上管理画面</Link></li>
-            <li><Link to="/customer">顧客情報入力</Link></li> {/* 追加 */}
-
+            <li><Link to="/salesmanagement">売上管理画面</Link></li>
+            <li><Link to="/customer">顧客情報入力</Link></li>
+            <li><Link to="/menumanager">メニュー情報登録・編集</Link></li>
           </ul>
         </nav>
         <Routes>
-          <Route path="/order" element={<Order />} />
-          <Route path="/auth" element={<Auth />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/secondorder" element={<SecondOrder />} />
+        <Route path="/auth" element={<Auth />} />
           <Route path="/kitchen" element={<Kitchen />} />
-          <Route path="/customer" element={<CustomerSurvey />} /> {/* 追加 */}
-          <Route path="/salesManagement" element={<SalesManagement />} /> {/* 追加 */}
-
+          <Route path="/customer" element={<CustomerSurvey />} />
+          <Route path="/salesmanagement" element={<SalesManagement />} />
+          <Route path="/menumanager" element={<MenuManager />} />
         </Routes>
       </div>
     </Router>

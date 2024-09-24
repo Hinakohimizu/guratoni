@@ -7,17 +7,21 @@ const Kitchen = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const ordersCollection = collection(db, "orders");
-    const unsubscribe = onSnapshot(ordersCollection, (snapshot) => {
-      const fetchedOrders = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setOrders(fetchedOrders);
-    });
+    const fetchOrders = () => {
+      const ordersCollection = collection(db, "orders");
+      const unsubscribe = onSnapshot(ordersCollection, (snapshot) => {
+        const fetchedOrders = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setOrders(fetchedOrders);
+      });
 
-    // クリーンアップ関数
-    return () => unsubscribe();
+      // クリーンアップ関数
+      return () => unsubscribe();
+    };
+
+    fetchOrders();
   }, []);
 
   const handleUpdateStatus = async (orderId, newStatus) => {
@@ -32,16 +36,6 @@ const Kitchen = () => {
     }
   };
 
-  // タイムスタンプをフォーマットする関数
-  const formatTimestamp = (timestamp) => {
-    if (!timestamp || typeof timestamp.toDate !== 'function') {
-      return "無効なタイムスタンプ";
-    }
-    
-    const date = timestamp.toDate();
-    return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
-  };
-
   return (
     <div className="kitchen-container">
       <h1>キッチン画面</h1>
@@ -50,17 +44,13 @@ const Kitchen = () => {
         {orders.length > 0 ? (
           orders.map((order) => (
             <div key={order.id} className="ticket">
-              {/* tables と counters の情報を1行目に表示 */}
               <h3>
                 {order.tables ? `${order.tables}` : ""}
                 {order.counters ? (order.tables ? `${order.counters}` : `Counter: ${order.counters}`) : ""}
               </h3>
-
-              {/* タイムスタンプを表示 */}
               <p className="timestamp">
                 {order.timestamp ? `注文時間: ${new Date(order.timestamp).toLocaleString()}` : "注文時間なし"}
               </p>
-
               <ul>
                 {order.orders && order.orders.map((item, idx) => (
                   <li key={idx}>
@@ -68,20 +58,30 @@ const Kitchen = () => {
                   </li>
                 ))}
               </ul>
-
               <div className="ticket-footer">
                 <span>Status: {order.status || "未設定"}</span>
                 <div className="actions">
-                  {order.status === "cooking" && (
-                    <button onClick={() => handleUpdateStatus(order.id, "cooked")}>
-                      調理済みに変更
-                    </button>
-                  )}
-                  {order.status === "cooked" && (
-                    <button onClick={() => handleUpdateStatus(order.id, "served")}>
-                      提供済みに変更
-                    </button>
-                  )}
+                  <button 
+                    className={`status-button cooking ${order.status === "cooking" ? "active" : ""}`} 
+                    onClick={() => handleUpdateStatus(order.id, "cooking")}
+                    disabled={order.status === "cooking"}
+                  >
+                    調理中
+                  </button>
+                  <button 
+                    className={`status-button cooked ${order.status === "cooked" ? "active" : ""}`} 
+                    onClick={() => handleUpdateStatus(order.id, "cooked")}
+                    disabled={order.status === "cooked"}
+                  >
+                    調理済みに変更
+                  </button>
+                  <button 
+                    className={`status-button served ${order.status === "served" ? "active" : ""}`} 
+                    onClick={() => handleUpdateStatus(order.id, "served")}
+                    disabled={order.status === "served"}
+                  >
+                    提供済みに変更
+                  </button>
                 </div>
               </div>
             </div>

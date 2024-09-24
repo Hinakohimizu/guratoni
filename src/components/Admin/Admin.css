@@ -8,3 +8,36 @@
     text-decoration: line-through; /* 取り消し線を追加 */
   }
   
+  /* Admin.css もしくは Kitchen.css に追加 */
+.status-button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cooking {
+  background-color: #FFA500; /* オレンジ色 */
+  color: white;
+}
+
+.cooked {
+  background-color: #32CD32; /* ライムグリーン */
+  color: white;
+}
+
+.served {
+  background-color: #1E90FF; /* ドジャーブルー */
+  color: white;
+}
+
+.status-button.active {
+  filter: none; /* アクティブなボタンは通常の色 */
+}
+
+.status-button:not(.active) {
+  background-color: gray; /* 非アクティブなボタンはグレー */
+  color: #ccc; /* テキスト色 */
+  cursor: not-allowed; /* ポインタを無効にする */
+}
