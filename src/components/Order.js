@@ -3,7 +3,7 @@ import './Order.css';
 import db from '../firebase';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Admin from './Admin';
+import Admin from './Admin/Admin';
 
 function Order() {
   const [foodmenu, setFoodmenu] = useState([]);

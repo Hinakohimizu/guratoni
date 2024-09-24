@@ -1,0 +1,50 @@
+/* Customer.css */
+
+.customer-survey {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.customer-survey h1 {
+  text-align: center;
+  color: #333;
+}
+
+.customer-survey form {
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-survey label {
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.customer-survey input[type="radio"],
+.customer-survey input[type="number"],
+.customer-survey select,
+.customer-survey textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.customer-survey button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+}
+
+.customer-survey button:hover {
+  background-color: #218838;
+}

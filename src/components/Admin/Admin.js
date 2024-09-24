@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import db from '../firebase';
+import db from '../../firebase';
 import './Admin.css';
 import { collection, onSnapshot, updateDoc, doc, getDoc, addDoc } from "firebase/firestore"; 
 import { Link } from 'react-router-dom';
@@ -61,7 +61,7 @@ function Admin() {
         submittedOrders.map((order) => (
           <div key={order.id} className={`order-card ${order.completed ? 'completed' : ''}`}>
             <h4>オーダー {order.id}</h4>
-            <p>日時: {new Date(order.timestamp).toLocaleString()}</p>
+            <p>注文時間: {new Date(order.timestamp).toLocaleString()}</p>
             <p>オーダー内容:</p>
             {order.orders?.map((item, idx) => (
               <div key={idx}>
