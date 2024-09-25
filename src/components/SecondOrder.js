@@ -38,11 +38,6 @@ function SecondOrder() {
   return (
       <div className="App">
         <h1>追加オーダー画面</h1>
-        <nav>
-          <Link to="/">オーダー画面</Link>
-          <Link to="/admin">受付画面</Link>
-          <Link to="/payment">支払い方法選択</Link>
-        </nav>
 
         <h2>メイン料理の追加オーダー</h2>
         {orders.map((_, index) => (

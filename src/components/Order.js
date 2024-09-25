@@ -65,11 +65,6 @@ function Order() {
   return (
       <div className="App">
         <h1>ファーストオーダー画面</h1>
-        <nav>
-          <Link to="/">オーダー画面</Link>
-          <Link to="/admin">受付画面</Link>
-          <Link to="/payment">支払い方法選択</Link>
-        </nav>
 
         <h2>テーブル番号 (複数選択可能)</h2>
         <div className="checkbox-group">
@@ -77,11 +72,11 @@ function Order() {
             <label key={index}>
               <input 
                 type="checkbox" 
-                value={`テーブル ${index + 1}`} 
-                checked={selectedTables.includes(`テーブル ${index + 1}`)} 
+                value={`T ${index + 1}`} 
+                checked={selectedTables.includes(`T ${index + 1}`)} 
                 onChange={handleTableChange} 
               />
-              テーブル {index + 1}
+              T {index + 1}
             </label>
           ))}
         </div>
@@ -92,11 +87,11 @@ function Order() {
             <label key={index}>
               <input 
                 type="checkbox" 
-                value={`カウンター ${index + 1}`} 
-                checked={selectedCounters.includes(`カウンター ${index + 1}`)} 
+                value={`C ${index + 1}`} 
+                checked={selectedCounters.includes(`C ${index + 1}`)} 
                 onChange={handleCounterChange} 
               />
-              カウンター {index + 1}
+              C {index + 1}
             </label>
           ))}
         </div>
@@ -110,8 +105,6 @@ function Order() {
 
         {Array.from({ length: numGuests }).map((_, index) => (
           <div key={index} className="order-section">
-            <h3>客 {index + 1}</h3>
-            <h4>メイン料理</h4>
             <div className="menu-grid">
               {foodmenu.map((item) => (
                 <button 
