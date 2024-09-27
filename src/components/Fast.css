@@ -10,7 +10,7 @@ h3 {
 
 /* ドロップダウンボックスのスタイル */
 select {
-  margin: 30px;
+  margin: 20px;
   width: 200px; /* 幅を指定 */
   height: 170px; /* 縦幅を大きく設定 */
   padding: 10px; /* 内側の余白を追加 */
@@ -30,7 +30,7 @@ select:focus {
 button {
   width: 200px;
   padding: 10px 20px; /* 内側の余白を追加 */
-  margin: 50px;
+  margin: 20px;
   font-size: 16px; /* フォントサイズを指定 */
   color: #fff; /* 文字色を白に指定 */
   background-color: #007bff; /* ボタンの背景色 */
