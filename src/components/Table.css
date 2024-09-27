@@ -5,13 +5,13 @@
 .table-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* 3列のグリッドレイアウト */
-  gap: 10px; /* 各ボタン間の余白 */
+  gap: 10px; 
   justify-content: center;
   padding: 20px;
 }
 
 .table-button {
-  width: 100%; /* グリッドに合わせて幅を自動調整 */
+  width: 100%; 
   height: 100px;
   background-color: #28cdfb;
   border: none;

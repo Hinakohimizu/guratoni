@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Order.css'; // CSSファイルをインポート
+import './Fast.css';
 import db from '../firebase';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';

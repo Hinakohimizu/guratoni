@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './Table.css'; // CSSファイルをインポート
+import './Table.css';
 import db from '../firebase';
 import { collection, getDocs, updateDoc, doc } from 'firebase/firestore';
-import Order from './Order'; // order.jsからインポート
+import Fast from './Fast'; 
 
 function TableManagement() {
   const [tables, setTables] = useState([]);
@@ -51,10 +51,14 @@ function TableManagement() {
               e.preventDefault();
               handleLongPress(table);
             }}
+            onClick={ () => {
+
+            }}
           >
             <div>
-              {`${table.tables.join(', ')}`}　{`${table.counters.join(', ')}`}
+              {table.tables ? table.tables.join(', ') : 'テーブルなし'}　{table.counters ? table.counters.join(', ') : 'カウンターなし'}
             </div>
+
             <div>
               {`${table.numGuests}人`}
             </div>
@@ -65,12 +69,10 @@ function TableManagement() {
       {showMenu && (
         <div className="menu-overlay" onClick={() => setShowMenu(false)}>
           <div className="menu">
-            <h3>{`テーブル ${selectedTable?.tables.join(', ')}`} の操作</h3>
-            <button onClick={() => handleMenuAction('QRコード作成')}>セルフオーダーQRコード作成</button>
-            <button onClick={() => handleMenuAction('人数編集')}>お客様人数編集</button>
-            <button onClick={() => handleMenuAction('会計編集')}>会計編集</button>
-            <button onClick={() => handleMenuAction('テーブル移動')}>テーブル移動</button>
-            <button onClick={() => handleMenuAction('会計合算')}>会計合算</button>
+            <h3>{`テーブル ${selectedTable?.tables ? selectedTable.tables.join(', ') : 'テーブルなし'}`} の操作</h3>
+            <button onClick={() => handleMenuAction('セルフオーダーQRコード作成')}>セルフオーダーQRコード作成</button>
+            <button onClick={() => handleMenuAction('ファースト編集')}>ファースト編集</button>
+            <button onClick={() => handleMenuAction('お会計')}>お会計</button>
           </div>
         </div>
       )}
